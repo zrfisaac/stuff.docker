@@ -1,0 +1,106 @@
+# [ zrfisaac ]
+
+# [ about ]
+# - author : Isaac Caires
+# . - email : zrfisaac@gmail.com
+# . - site : zrfisaac.github.io
+
+# [ url ]
+
+# - : https://container-registry.oracle.com
+
+# - : https://container-registry.oracle.com/ords/f?p=113:4:130296520258781:::4:P4_REPOSITORY,AI_REPOSITORY,AI_REPOSITORY_NAME,P4_REPOSITORY_NAME,P4_EULA_ID,P4_BUSINESS_AREA_ID:803,803,Oracle%20Database%20Express%20Edition,Oracle%20Database%20Express%20Edition,1,0&cs=3W-Ozo9cJdufB2BTR6sydJb48hsbMEQjLyXvI7KZozZOKk2xXUVMOdg8SbJHDIshl-DGAz3KRRckcOqNamAObsQ
+
+# [ docker-compose ]
+networks:
+  main:
+    driver: bridge
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: main_mssql
+    user: root
+    restart: always
+    volumes:
+      - "./public:/public"
+      - "./config/mssql.conf:/var/opt/mssql/mssql.conf"
+      - "./config/openssl.cnf:/etc/ssl/openssl.cnf"
+      - "./mssql:/var/opt/mssql"
+    ports:
+      - "1433:1433"
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=ABcd!@34"
+    #network_mode: "host"
+    networks: ["main"]
+  mariadb:
+    image: mariadb:latest
+    container_name: main_mariadb
+    user: root
+    restart: always
+    volumes:
+      - "./public:/public"
+    ports:
+      - "3300:3300"
+    environment:
+      - "MARIADB_ROOT_PASSWORD=ABcd!@34"
+    #network_mode: "host"
+    networks: ["main"]
+  mysql:
+    image: mysql:8.0
+    container_name: main_mysql
+    user: root
+    restart: always
+    volumes:
+      - "./public:/public"
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=ABcd!@34"
+    #network_mode: "host"
+    networks: ["main"]
+  oracle:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: main_oracle
+    restart: always
+    volumes:
+      - "./public:/public"
+    ports:
+      - "1521:1521"
+    environment:
+      - "ORACLE_PWD=ABcd!@34"
+      - "ORACLE_CHARACTERSET=AL32UTF8"
+    #network_mode: "host"
+    networks: ["main"]
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: main_portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  postgres:
+    image: postgres:14
+    container_name: main_postgres
+    environment:
+      POSTGRES_PASSWORD: "ABcd!@34"
+    volumes:
+      - "./public:/public"
+    ports:
+      - "5432:5432"
+    #network_mode: "host"
+    networks: ["main"]
+  tomcat:
+    image: tomcat:9-jre8
+    container_name: main_tomcat
+    volumes:
+      - "./public:/public"
+      - "./webapps:/usr/local/tomcat/webapps"
+    environment:
+      - "WEBRUN_HOME=/usr/local/tomcat/webapps"
+    ports:
+      - 8080:8080
+    #network_mode: "host"
+    networks: ["main"]
