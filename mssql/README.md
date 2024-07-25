@@ -17,8 +17,11 @@ This repository contains a Dockerfile to create a Docker image for Microsoft SQL
 ## Features
 
 - Based on the official [mcr.microsoft.com/mssql/server:2022-latest](https://hub.docker.com/_/microsoft-mssql-server) image.
+
 - Custom SQL Server configuration.
+
 - Custom OpenSSL configuration.
+
 - Pre-configured environment variables for accepting EULA and setting the SA password.
 
 ## Getting Started
@@ -57,6 +60,7 @@ This command will start the SQL Server container in detached mode with port 1433
 The image includes custom configuration files:
 
 - "mssql.conf" : Custom SQL Server configuration.
+
 - "openssl.cnf" : Custom OpenSSL configuration.
 
 These files are located in the "config" directory and are added to the container during the build process.
@@ -64,17 +68,8 @@ These files are located in the "config" directory and are added to the container
 ### Environment Variables
 
 - "ACCEPT_EULA" : Must be set to "Y" to accept the SQL Server EULA.
+
 - "SA_PASSWORD" : Sets the password for the SQL Server "sa" user.
-
-### Keeping the Container Alive
-
-The container is kept alive using the following command:
-
-```sh
-CMD ["tail", "-f", "/dev/null"]
-```
-
-This ensures the container does not exit immediately after starting.
 
 ### License
 
@@ -83,7 +78,9 @@ This project is licensed under the GPL-3.0 License - see the LICENSE file for de
 ### Maintainer
 
 Isaac Caires
+
 zrfisaac@gmail.com
+
 https://zrfisaac.github.io
 
 ### Contributing
