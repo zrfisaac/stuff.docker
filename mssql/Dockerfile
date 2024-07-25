@@ -25,4 +25,4 @@ ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=ABcd!@34
 
 # : - run
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]
