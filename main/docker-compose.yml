@@ -13,7 +13,7 @@
 
 # [ docker-compose ]
 networks:
-  main:
+  local:
     driver: bridge
 
 services:
@@ -33,7 +33,7 @@ services:
       - "ACCEPT_EULA=Y"
       - "SA_PASSWORD=ABcd!@34"
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
   mariadb:
     image: mariadb:latest
     container_name: main_mariadb
@@ -46,7 +46,7 @@ services:
     environment:
       - "MARIADB_ROOT_PASSWORD=ABcd!@34"
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
   mysql:
     image: mysql:8.0
     container_name: main_mysql
@@ -59,7 +59,7 @@ services:
     environment:
       - "MYSQL_ROOT_PASSWORD=ABcd!@34"
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
   oracle:
     image: container-registry.oracle.com/database/express:21.3.0-xe
     container_name: main_oracle
@@ -72,7 +72,7 @@ services:
       - "ORACLE_PWD=ABcd!@34"
       - "ORACLE_CHARACTERSET=AL32UTF8"
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
   portainer:
     image: portainer/portainer-ce:latest
     container_name: main_portainer
@@ -91,7 +91,7 @@ services:
     ports:
       - "5432:5432"
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
   tomcat:
     image: tomcat:9-jre8
     container_name: main_tomcat
@@ -103,4 +103,4 @@ services:
     ports:
       - 8080:8080
     #network_mode: "host"
-    networks: ["main"]
+    networks: ["local"]
