@@ -8,4 +8,4 @@
 
 # [ bash ]
 command -v sudo >/dev/null 2>&1 && sudo="sudo" || sudo=""
-$sudo docker exec -it main_postgres bash
+sudo docker exec -it -e PGPASSWORD='ABcd!@34' main_postgres psql -U postgres

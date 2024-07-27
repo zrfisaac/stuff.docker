@@ -17,5 +17,5 @@ services:
       - "WEBRUN_HOME=/usr/local/tomcat/webapps"
     ports:
       - 8080:8080
-    network_mode: "host"
-    #networks: ["local"]
+    #network_mode: "host"
+    networks: ["local"]

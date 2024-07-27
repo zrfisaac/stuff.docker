@@ -4,4 +4,13 @@
 # - author : Isaac Caires
 # . - email : zrfisaac@gmail.com
 # . - site : zrfisaac.github.io
-# - version : zrfisaac.stuff.docker.main : 0.0.3
+
+# [ gitignore ]
+mssql/*
+public/*
+webapps/*
+
+# : - zrfisaac
+.git
+.vs
+_*
