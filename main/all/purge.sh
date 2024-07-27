@@ -17,7 +17,7 @@ $sudo docker container stop main_oracle
 $sudo docker container stop main_portainer
 $sudo docker container stop main_postgres
 $sudo docker container stop main_tomcat
-
+$sudo docker container stop main_alpine
 
 # - remove
 $sudo docker container rm main_mssql
@@ -27,3 +27,4 @@ $sudo docker container rm main_oracle
 $sudo docker container rm main_portainer
 $sudo docker container rm main_postgres
 $sudo docker container rm main_tomcat
+$sudo docker container rm main_alpine
