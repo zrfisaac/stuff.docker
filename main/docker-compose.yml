@@ -14,5 +14,6 @@ services:
   alpine:
     image: i386/alpine:latest
     container_name: main_alpine
+    command: tail -f /dev/null
     #network_mode: "host"
     networks: ["local"]
